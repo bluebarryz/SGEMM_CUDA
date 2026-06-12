@@ -5,6 +5,7 @@
 #include "kernels/12_kernel_double_buffering.cuh"
 #include "kernels/13_naive_bad.cuh"
 #include "kernels/14_naive_better.cuh"
+#include "kernels/15_shared_mem_tiling.cuh"
 #include "kernels/1_naive.cuh"
 #include "kernels/2_kernel_global_mem_coalesce.cuh"
 #include "kernels/3_kernel_shared_mem_blocking.cuh"

@@ -5,6 +5,9 @@ CMAKE := cmake
 BUILD_DIR := build
 BENCHMARK_DIR := benchmark_results
 
+# Nsight Compute CLI. Not always on PATH; fall back to the CUDA toolkit copy.
+NCU ?= $(shell command -v ncu 2>/dev/null || echo /usr/local/cuda-13.2/bin/ncu)
+
 all: build
 
 build:
@@ -28,7 +31,8 @@ cuobjdump: build
 
 # Usage: make profile KERNEL=<integer> PREFIX=<optional string>
 profile: build
-	@ncu --set full --export $(BENCHMARK_DIR)/$(PREFIX)kernel_$(KERNEL) --force-overwrite $(BUILD_DIR)/sgemm $(KERNEL)
+	@mkdir -p $(BENCHMARK_DIR)
+	@$(NCU) --set full --export $(BENCHMARK_DIR)/$(PREFIX)kernel_$(KERNEL) --force-overwrite $(BUILD_DIR)/sgemm $(KERNEL)
 
 bench: build
 	@bash gen_benchmark_results.sh
