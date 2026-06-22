@@ -13,4 +13,4 @@ cuBLAS_sgemm
 simplest
 
 # benchmark results
-benchmark_results/
+# benchmark_results/
